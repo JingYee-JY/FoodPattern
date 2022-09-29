@@ -1,0 +1,83 @@
+.text p{
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.direction{
+    position: absolute;
+    width: 15%;
+    bottom: -20px;
+}
+
+.squence{
+    display: flex;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    justify-content: center;
+    position: relative;
+}
+
+.squence img{
+    max-width: 200px;
+}
+
+h1{
+    margin: 0;
+}
+
+.example{
+    width: 33%;
+}
+
+.options{
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+    display: grid;
+    gap: 2%;
+    grid-template-columns: repeat(2,48%);
+}
+
+#btn1, #btn2, #btn3, #btn4{
+    position: relative;
+    background-color: transparent;
+    border: transparent;
+    border-radius: 10px;
+}
+
+#btn1 img, #btn2 img, #btn3 img, #btn4 img{
+    width: 65%;
+    max-width: 200px;
+}
+
+.sign{
+    width: 20% !important;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.hide{
+    visibility: hidden;
+    display: none;
+}
+
+.emoji{
+    margin: 0% auto;
+    margin-top: 80px;
+    width: 50%;
+}
+
+.encouragment{
+    margin: 0;
+    font-size: 40px;
+}
+
+/*ipad*/
+@media screen and (min-width: 768px) and (max-width: 1199px){
+    .text p,.number{
+        font-size: 30px;
+    }
+    .squence{
+        padding-bottom: 3%;
+    }
+}
