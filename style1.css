@@ -17,16 +17,13 @@
     position: relative;
 }
 
-.squence img{
-    max-width: 200px;
-}
-
 h1{
     margin: 0;
 }
 
 .example{
     width: 33%;
+    max-width: 200px;
 }
 
 .options{
@@ -79,5 +76,18 @@ h1{
     }
     .squence{
         padding-bottom: 3%;
+    }
+}
+
+/*desktop*/
+@media screen and (min-width:1200px){
+    .example{
+        width: 25%;
+    }
+    #btn1 img, #btn2 img, #btn3 img, #btn4 img{
+        width: 60%;
+    }
+    .direction{
+        width: 11%;
     }
 }
