@@ -31,7 +31,13 @@ let foods = [
     {number: "6",image:"./img/IceKachang.png"},
     {number: "7",image:"./img/NasiLemak.png"},
     {number: "8",image:"./img/Otah.png"},
-    {number: "9",image:"./img/Satay.png"}
+    {number: "9",image:"./img/Satay.png"},
+    {number: "10",image:"./img/ChickenFeet.png"},
+    {number: "11",image:"./img/HawFlakes.png"},
+    {number: "12",image:"./img/IceCreamSandwich.png"},
+    {number: "13",image:"./img/IcedGemBiscuits.png"},
+    {number: "14",image:"./img/Laksa.png"},
+    {number: "15",image:"./img/PandanCake.png"}
 ]
 
 Start()
@@ -69,30 +75,30 @@ function Question(){
 
     qIndex = Math.floor(Math.random() * 3);
 
-    let food1 = Math.floor(Math.random() * 9);
-    let food2 = Math.floor(Math.random() * 9);
-    let food3 = Math.floor(Math.random() * 9);
+    let food1 = Math.floor(Math.random() * foods.length);
+    let food2 = Math.floor(Math.random() * foods.length);
+    let food3 = Math.floor(Math.random() * foods.length);
 
-    randomBtn1 = Math.floor(Math.random() * 9);
-    randomBtn2 = Math.floor(Math.random() * 9);
-    randomBtn3 = Math.floor(Math.random() * 9);
-    randomBtn4 = Math.floor(Math.random() * 9);
+    randomBtn1 = Math.floor(Math.random() * foods.length);
+    randomBtn2 = Math.floor(Math.random() * foods.length);
+    randomBtn3 = Math.floor(Math.random() * foods.length);
+    randomBtn4 = Math.floor(Math.random() * foods.length);
 
     for(let i = 0; i < 20; i++){
         if(food1 == food2 || food1 == food3){
-            food1 = Math.floor(Math.random() * 9);
+            food1 = Math.floor(Math.random() * foods.length);
         }
         if(food2 == food3){
-            food2 = Math.floor(Math.random() * 9);
+            food2 = Math.floor(Math.random() * foods.length);
         }
         if(randomBtn1 == randomBtn2 || randomBtn1 == randomBtn3 || randomBtn1 == randomBtn4){
-            randomBtn1 = Math.floor(Math.random() * 9);
+            randomBtn1 = Math.floor(Math.random() * foods.length);
         }
         if(randomBtn2 == randomBtn3 || randomBtn2 == randomBtn4){
-            randomBtn2 = Math.floor(Math.random() * 9);
+            randomBtn2 = Math.floor(Math.random() * foods.length);
         }
         if(randomBtn3 == randomBtn4){
-            randomBtn3 = Math.floor(Math.random() * 9);
+            randomBtn3 = Math.floor(Math.random() * foods.length);
         }
     }
 
