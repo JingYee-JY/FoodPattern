@@ -1,17 +1,26 @@
+const start = document.querySelector(".start")
+const startButton = document.querySelector(".startButton")
 const questionNumber = document.querySelector(".number")
 const squence = document.querySelector(".squence")
-const confrimButton = document.querySelector(".confrimButton")
 const game = document.querySelector(".game")
 const final = document.querySelector(".final")
 const emoji = document.querySelector(".emoji")
 const encouragment = document.querySelector(".encouragment")
+const againButton = document.querySelector(".againButton")
+const homeButton = document.querySelector(".homeButton")
+
+const clickSound = document.getElementById("click")
+const completed = document.getElementById("completed")
+const clap = document.getElementById("clap")
+const correct = document.getElementById("correct")
+const wrong = document.getElementById("wrong")
+const lose = document.getElementById("lose")
 
 let totalQuestion;
 let current;
 let choice;
 let answer;
 let answerImage;
-let selectedBtn;
 let rightBtn;
 let gotRight;
 let once;
@@ -55,14 +64,20 @@ function Question(){
         final.classList.remove("hide");
         let pass = totalQuestion/2
         if(score == totalQuestion){
+            clap.currentTime = 0
+            clap.play()
             emoji.src = "./img/excellentJob.png"
             encouragment.innerHTML = "Excellent job!"
         }
         else if(score >= pass){
+            completed.currentTime = 0
+            completed.play()
             emoji.src = "./img/great.png"
             encouragment.innerHTML = "Great!"
         }
         else{
+            lose.currentTime = 0
+            lose.play()
             emoji.src = "./img/tryAgain.png" 
             encouragment.innerHTML = "Try Again!"
         }
@@ -70,7 +85,7 @@ function Question(){
     }
 
     current += 1;
-    choice = 0
+    choice = false
     questionNumber.innerHTML = current + "/" + totalQuestion;
 
     qIndex = Math.floor(Math.random() * 3);
@@ -109,6 +124,7 @@ function Question(){
         <img class="example" src="${foods[food1].image}">
         <img class="example" src="${foods[food2].image}">
         <img class="example" src="${foods[food1].image}">
+        <img class="example" src="./img/question.png">
         <img class="direction" src="./img/help.png">`
 
         answerImage = foods[food2].image
@@ -119,6 +135,7 @@ function Question(){
         <img class="example" src="${foods[food1].image}">
         <img class="example" src="${foods[food1].image}">
         <img class="example" src="${foods[food1].image}">
+        <img class="example" src="./img/question.png">
         <img class="direction" src="./img/help.png">`
 
         answerImage = foods[food1].image
@@ -129,6 +146,7 @@ function Question(){
         <img class="example" src="${foods[food3].image}">
         <img class="example" src="${foods[food2].image}">
         <img class="example" src="${foods[food1].image}">
+        <img class="example" src="./img/question.png">
         <img class="direction" src="./img/help.png">`
 
         answerImage = foods[food3].image
@@ -159,21 +177,40 @@ function Question(){
 
         if(once == false){
             currentBtn.addEventListener("click", () => {
-                let number = currentBtn.getAttribute("data")
-                if(choice == number){
-                    currentBtn.style.backgroundColor = "transparent"
-                    choice = 0
-                    selectedBtn = null
-                    return
+                if(choice == false){
+                    let number = currentBtn.getAttribute("data")
+
+                let sign = document.createElement("img");
+                sign.classList.add("sign")
+
+                if(number == answer){
+                    correct.currentTime = 0
+                    correct.play()
+                    score += 1
+                    currentBtn.style.backgroundColor = "green"
+                    sign.src = "./img/right.png"
                 }
-                else{
-                    if(selectedBtn !=null){
-                        selectedBtn.style.backgroundColor = "transparent"
-                    }
+                if(number != answer){
+                    wrong.currentTime = 0
+                    wrong.play()
+                    let rightSign = document.createElement("img");
+                    rightSign.classList.add("sign")
+
+                    currentBtn.style.backgroundColor = "red"
+                    sign.src = "./img/wrong.png"
+                    
+                    rightBtn.style.backgroundColor = "green"
+                    rightSign.src = "./img/right.png"
+                    rightBtn.appendChild(rightSign);
+                }
+                currentBtn.appendChild(sign);
+                choice = true
+                
+                let delay = setTimeout(() => {
                     currentBtn.style.backgroundColor = "white"
-                    choice = number
-                    selectedBtn = currentBtn
-                    console.log(choice)
+                    rightBtn.style.backgroundColor = "white"
+                    Question()
+                }, 1500);
                 }
             })
         }
@@ -197,36 +234,37 @@ function Question(){
     }
 }
 
-confrimButton.addEventListener("click", () => {
-    if(choice == 0){
-        return
-    }
-    confrimButton.classList.add("hide")
-    let sign = document.createElement("img");
-    sign.classList.add("sign")
-
-    if(choice == answer){
-        score += 1
-        selectedBtn.style.backgroundColor = "green"
-        sign.src = "./img/right.png"
-    }
-    if(choice != answer){
-        let rightSign = document.createElement("img");
-        rightSign.classList.add("sign")
-
-        selectedBtn.style.backgroundColor = "red"
-        sign.src = "./img/wrong.png"
-        
-        rightBtn.style.backgroundColor = "green"
-        rightSign.src = "./img/right.png"
-        rightBtn.appendChild(rightSign);
-    }
-    selectedBtn.appendChild(sign);
-
+startButton.addEventListener("click", () => {
+    playClickSound()
     let delay = setTimeout(() => {
-        selectedBtn.style.backgroundColor = "transparent"
-        rightBtn.style.backgroundColor = "transparent"
-        Question()
-        confrimButton.classList.remove("hide")
-    }, 1500);
+        start.classList.add("hide")
+        game.classList.remove("hide")
+    }, 200);
 })
+
+againButton.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+        final.classList.add("hide")
+        start.classList.remove("hide")
+    }, 200);
+})
+
+
+homeButton.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+        location.assign('https://gimme.sg/activations/dementia/');
+    }, 200);
+})
+
+function playClickSound(){
+    console.log(clickSound)
+    clickSound.currentTime = 0
+    clickSound.play()
+}
+
+/*prevent double tag zoom*/
+document.addEventListener('dblclick', function(event) {
+event.preventDefault();
+}, { passive: false });
